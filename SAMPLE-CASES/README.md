@@ -65,3 +65,18 @@ All party names are placeholders. No real client data appears here.
 - The `save_draft_as_docx` tool requires `pandoc` to be installed on the user's machine.
 - The connector applies a three-layer privacy firewall throughout.
 - The 28 bench exemplars cover all 25 Indian High Courts; calling `list_benches()` returns the available identifiers.
+
+---
+
+## Synthetic case folder for Anthropic reviewer
+
+A fully-fictional, AAAK-pseudonymised case folder is bundled at:
+
+`SAMPLE-CASES/synthetic-caste-cert-quashing-civil-wp/`
+
+It contains 2 source documents (.docx) plus a `case-facts-background.md` narrative.
+
+**To exercise the pipeline end-to-end**, point `read_case_folder(path)` at this folder and follow the orchestration script returned by `get_agent_instructions()`. The Reader stage will extract facts, the Format stage will load the case-type SKILL.md template, and the remaining four agents (Drafter → Verifier → Refiner → Overseer) will produce `final-draft.docx`.
+
+All identifiers in the bundled documents are structural placeholders (`[Petitioner-A]`, `[Premises-Address-Placeholder]`, `[Monthly-Rent-Placeholder]`, `[PAN-PLACEHOLDER-10-CHAR]`, `[DIN-PLACEHOLDER-19-DIGIT]`, `[Total-Arrears-Placeholder]`, etc.). The Pseudonymisation Gateway is therefore exercising against pre-pseudonymised content; reviewers seeking to test re-substitution may replace placeholders with their own fictional values before invoking the pipeline.
+
