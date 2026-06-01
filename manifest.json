@@ -1,0 +1,117 @@
+{
+  "manifest_version": "0.4",
+  "name": "wolfgang-indian-hc-drafting",
+  "display_name": "Wolfgang Rush \u2014 Indian High Court Drafting \u00b7 Claude Desktop Extension",
+  "version": "0.1.5",
+  "description": "Bench-config-aware drafting connector for any High Court of India. ACRONYM DISAMBIGUATION (read this BEFORE classifying the user's ask — these acronyms are NOT phonetic): APL = Application under Section 482 CrPC / Section 528 BNSS (QUASHING / inherent jurisdiction · case_type='application-482'). ABA = Anticipatory Bail Application (case_type='anticipatory-bail'). BA = Regular Bail (case_type='bail'). WP = Civil Writ Petition Art 226/227 (case_type='civil-wp'). CrWP = Criminal Writ Petition (case_type='criminal-wp'). PIL = Public Interest Litigation. CrA = Criminal Appeal. CrR = Criminal Revision. FA = First Appeal CPC 96. SA = Second Appeal CPC 100. CP = Contempt Petition. MACT = Motor Accident Claims Tribunal. MAT = Matrimonial Appeal. **APL ≠ ABA** — APL is the FIR/proceedings quashing application; ABA is anticipatory bail. A FIR naming an unknown accused does NOT auto-map to anticipatory-bail. If the user typed APL, case_type is application-482. If the user typed ABA, case_type is anticipatory-bail. Do not infer from FIR content — the acronym IS the source of truth. STRICT SIX-AGENT PIPELINE: Reader → Format → Drafter → Verifier → Refiner → Overseer, producing six named artifacts (case-facts.md, format-shell.md, draft-v1.docx, verification-report.md, draft-v2.docx, final-draft.docx). MANDATORY INVOCATION ORDER: (1) call get_agent_instructions() with NO arguments FIRST to receive the full orchestration script, (2) follow every step in that script in order, (3) save every intermediate artifact via save_artifact, (4) save final-draft.docx via save_draft_as_docx. DO NOT write standalone python-docx or JavaScript scripts to generate output — invoke the pipeline tools directly. DO NOT skip the Verifier (anti-hallucination firewall) or the Overseer (opposing-counsel lens). Zero data leaves the user's machine.",
+  "long_description": "Wolfgang Rush \u2014 Indian High Court Drafting is a local-execution MCPB Desktop Extension that supports any High Court of India through a bench-config dimension. The connector ships 28 bench exemplars covering all 25 High Courts (including separate exemplars for the Bombay HC Principal Bench at Mumbai, Nagpur Bench, Aurangabad Bench, and Goa Bench) and exposes the six-agent drafting pipeline (Reader, Format, Drafter, Verifier, Refiner, Overseer) and thirteen case-type templates as MCP tools that Claude can orchestrate from a Claude Desktop chat. Bench-specific Registry-facing values (Court header, Appellate-Side / Original-Side Rules reference, annexure-marker convention, paper-size and font preference) are sourced from the bench-config exemplar that matches the user's High Court. Output is rendered as filing-grade .docx via pandoc. All processing happens on the user's machine.",
+  "author": {
+    "name": "Wolfgang Rush",
+    "email": "advrushikeshravindramahajan@gmail.com",
+    "url": "https://wolfgangrush.github.io"
+  },
+  "homepage": "https://wolfgangrush.github.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wolfgangrush/indian-hc-drafting-mcpb"
+  },
+  "documentation": "https://github.com/Wolfgangrush/indian-hc-drafting-mcpb/blob/main/README.md",
+  "support": "https://github.com/Wolfgangrush/indian-hc-drafting-mcpb/issues",
+  "icon": "icon.png",
+  "license": "MIT",
+  "keywords": [
+    "law",
+    "legal",
+    "drafting",
+    "india",
+    "high-court",
+    "article-226",
+    "article-227",
+    "writ-petition",
+    "pil",
+    "criminal-appeal",
+    "section-482-crpc",
+    "section-528-bnss",
+    "bail",
+    "anticipatory-bail",
+    "contempt",
+    "first-appeal",
+    "second-appeal",
+    "criminal-revision",
+    "mact",
+    "matrimonial-appeal",
+    "wolfgang-rush",
+    "mcpb",
+    "claude-desktop"
+  ],
+  "privacy_policies": [
+    "https://wolfgangrush.github.io/privacy/"
+  ],
+  "server": {
+    "type": "uv",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "${__dirname}",
+        "run",
+        "server/main.py"
+      ]
+    }
+  },
+  "tools": [
+    {
+      "name": "list_case_types",
+      "description": "List all High Court case types this connector can draft (13 case types covering civil and criminal practice on the High Court side)."
+    },
+    {
+      "name": "get_case_type_format",
+      "description": "Get the drafting format and structure for a specific High Court case type. Returns the full SKILL.md content."
+    },
+    {
+      "name": "get_agent_instructions",
+      "description": "MANDATORY FIRST CALL with no arguments — returns the full six-agent orchestration script with every step and tool call enumerated. Optional argument agent_name (reader/format/drafter/verifier/refiner/overseer) returns that single agent's persona instructions."
+    },
+    {
+      "name": "create_case_folder",
+      "description": "Create the case folder for this drafting session on the user's machine. Returns the folder path. The folder contains an inputs/ subfolder (where the user's source documents are written) and an artifacts/ subfolder (where the six pipeline artifacts are saved)."
+    },
+    {
+      "name": "save_artifact",
+      "description": "Save a pipeline artifact (case-facts.md, format-shell.md, draft-v1.md, verification-report.md, draft-v2.md, opposing-notes.md, or any input document) into the case folder. Required at the end of every agent step. Prevents the model from short-circuiting the pipeline by writing standalone scripts."
+    },
+    {
+      "name": "get_pleading_base",
+      "description": "Get the shared HC pleading base structure used by all case-types (Cause Title to Synopsis to Facts to Grounds to Prayer to Annexures)."
+    },
+    {
+      "name": "list_benches",
+      "description": "List the 28 High Court bench exemplars available (covers all 25 Indian High Courts including multi-bench HCs like Bombay HC Principal Mumbai, Nagpur, Aurangabad, Goa)."
+    },
+    {
+      "name": "get_bench_config",
+      "description": "Get the bench-specific configuration for a High Court (Court header text, parties separator, section-header style, annexure prefix, counsel block format, paper size, font preference, Appellate-Side vs Original-Side Rules reference)."
+    },
+    {
+      "name": "read_case_folder",
+      "description": "Read all files in a case folder on the user's machine and return text content for fact extraction. Supports .md, .txt, .pdf (via pdftotext), .docx (via pandoc)."
+    },
+    {
+      "name": "save_draft_as_docx",
+      "description": "Save a markdown draft pleading as a filing-grade .docx file using pandoc."
+    }
+  ],
+  "tools_generated": false,
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  }
+}
