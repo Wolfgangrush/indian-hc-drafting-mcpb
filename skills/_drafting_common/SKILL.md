@@ -25,7 +25,7 @@ The plugin's core design principle: a uniform structural skeleton across Indian 
    - Skills/agents may NOT: rm, mv, rmdir, trash, rename, delete, overwrite-without-versioning
 
 5.1. **🔴 WORKING-COPY RULE — never operate on originals.**
-   When an agent needs to convert / extract / transform any existing case file, it MUST create a working copy under `~/.claude/working-copies/<case-name>/` and operate on the copy only. The original file is NEVER opened-for-write.
+   When an agent needs to convert / extract / transform any existing case file, it MUST create a working copy under `<case-folder>/_working-copies/<case-name>/` and operate on the copy only. The original file is NEVER opened-for-write.
 
 ## LOCKED CONSTRAINTS (Indian High Court AI-use risk — all HCs, not Bombay only)
 

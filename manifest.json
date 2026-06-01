@@ -7,7 +7,7 @@
   "long_description": "Wolfgang Rush — Indian High Court Drafting is a local-execution MCPB Desktop Extension that supports any High Court of India through a bench-config dimension. The connector ships 28 bench exemplars covering all 25 High Courts (including separate exemplars for the Bombay HC Principal Bench at Mumbai, Nagpur Bench, Aurangabad Bench, and Goa Bench) and exposes the six-agent drafting pipeline (Reader, Format, Drafter, Verifier, Refiner, Overseer) and thirteen case-type templates as MCP tools that Claude can orchestrate from a Claude Desktop chat. Bench-specific Registry-facing values (Court header, Appellate-Side / Original-Side Rules reference, annexure-marker convention, paper-size and font preference) are sourced from the bench-config exemplar that matches the user's High Court. Output is rendered as filing-grade .docx via pandoc. All processing happens on the user's machine.",
   "author": {
     "name": "Wolfgang Rush",
-    "email": "advrushikeshravindramahajan@gmail.com",
+    "email": "wolfgangrush@gmail.com",
     "url": "https://wolfgangrush.github.io"
   },
   "homepage": "https://wolfgangrush.github.io",

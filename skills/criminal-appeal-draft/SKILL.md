@@ -76,5 +76,4 @@ The user reviews `final-draft.docx` in Word with tracked changes.
 All rules from `_drafting_common/SKILL.md` apply. In particular:
 - ❌ NEVER assume format language. Always read `format-from-user.md`.
 - ❌ NEVER cite case law from training data. Use "Will be cited at the time of hearing."
-- ❌ NEVER write to palace.
 - ❌ NEVER delete/rename/overwrite anything in case folder. Only WRITE new files.

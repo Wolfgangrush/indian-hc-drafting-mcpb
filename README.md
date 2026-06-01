@@ -102,7 +102,6 @@ Canonical privacy policy: **<https://wolfgangrush.github.io/privacy/>**
 Case-folder contents passed to this connector may include material attracting attorney-client privilege under **Section 132 of the Bharatiya Sakshya Adhiniyam 2023** / **Section 126 of the Indian Evidence Act 1872**. The user remains professionally responsible consistent with Bar Council of India rules and client-engagement terms.
 
 
-
 ## Architecture · how the six agents work
 
 This connector runs a strict six-agent pipeline locally on your machine:
@@ -179,9 +178,7 @@ MIT. See LICENSE.
 
 ## Publisher
 
-**Rushikesh R. Mahajan**, Advocate, Bombay High Court (Nagpur Bench), publishing as **Wolfgang Rush**.
-
-Contact: advrushikeshravindramahajan@gmail.com
+**Wolfgang Rush** — independent open-source legal-tech publisher. Contact: wolfgangrush@gmail.com
 
 ## Source
 
