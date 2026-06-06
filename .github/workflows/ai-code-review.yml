@@ -1,0 +1,139 @@
+name: AI Code Review
+
+# Runs Claude as a PR reviewer. Mirrors the local /lawtech-code-review +
+# /lawtech-security-audit skills RSH runs pre-push. Surface = architecture
+# bugs, not style. Gates merge via required status check (see CODE_REVIEW_SETUP.md).
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+
+concurrency:
+  group: ai-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  ai-review:
+    name: Claude review
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Claude code review
+        id: claude
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Pin to a verified commit SHA after the first successful run on a test PR.
+          # @beta is a moving tag; for a merge-gate we want determinism once it works.
+          direct_prompt: |
+            You are reviewing a pull request on a Wolfgang Rush MCPB plugin
+            (wolfgang-indian-hc-drafting — an Indian High Court drafting toolchain
+            distributed as a Claude Desktop Extension). Review the diff between
+            this PR's head and main.
+
+            Focus areas (in priority order). Skip style / formatting / linter
+            preferences — those are not your job.
+
+            1. SQL safety
+               - String interpolation in queries
+               - Unparameterised queries
+               - Raw SQL inside an ORM context
+               - Multi-write paths missing a transaction
+
+            2. LLM trust boundaries
+               - User input passed directly into an LLM prompt without sanitisation
+               - LLM output rendered as HTML / executed as code / executed as SQL
+                 without a verification step
+               - Prompt-injection vectors via user-controlled fields
+               - System-prompt / instruction leak through error messages
+
+            3. Conditional side effects
+               - if-blocks that mutate global state silently
+               - Error handlers that swallow + continue without surfacing
+               - Retry loops without backoff or cap
+               - Async code missing error catch
+
+            4. DPDP / privacy leakage (this tool handles real client matter data)
+               - Personal data logged to console or structured logs
+                 (named entity / Aadhaar / PAN / phone / email / case number /
+                 party name / advocate name / judge name)
+               - Client matter data persisted without a consent / use-flag check
+               - Cross-border transfer without an explicit user gate
+               - Children's data path without an age gate
+               - Breach-notification path missing
+               - Consent withdrawal not implemented if consent collected
+
+            5. Secrets
+               - Hardcoded API keys (ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY,
+                 sk-ant-, sk-proj-, AKIA, sk_live_, ghp_, xoxb-)
+               - .env files tracked in git
+               - Secrets in CI configs (not via secret store)
+
+            6. MCPB-specific
+               - Tools defined without the @mcp.tool decorator
+               - manifest.json tool-count vs server tool-count mismatch
+               - save_artifact / file-write paths writing outside the allow-list
+               - Hardcoded bench / state / forum defaults that should be
+                 required-no-default parameters (see Bench/State/Forum Neutrality
+                 doctrine — author's home jurisdiction must not be the default)
+               - Maintainer-handle / production-pipeline / palace-internal strings
+                 leaking into public-facing code, README, or manifest
+
+            7. Self-representation integrity
+               - Any first-person past-tense claim ("I built X in production",
+                 "Client PII was sanitised") added to README / docs / commit messages
+                 that the diff cannot substantiate
+
+            For each finding, post an inline review comment with this shape:
+
+              [SEVERITY] one-line summary
+              Why it matters: ...
+              Suggested fix: ...
+
+            Severity values:
+              - CRITICAL — blocks merge. Use ONLY for: secret exposure, SQLi,
+                client-PII leak to logs / external API, RCE, bench-default leak,
+                unverifiable self-representation claim, missing @mcp.tool decorator
+                on a registered tool, manifest/server count mismatch.
+              - WARNING — informational. Use for: unbounded retry, missing
+                async catch, soft style issues that touch correctness.
+              - NIT — skip if low signal.
+
+            After all line comments, post one summary review comment with:
+              - count of CRITICAL findings
+              - count of WARNING findings
+              - one-line verdict
+
+            Use the REQUEST_CHANGES review event if any CRITICAL is found;
+            otherwise APPROVE.
+          allowed_tools: "Read,Grep,Glob,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(ls:*),Bash(cat:*),Bash(grep:*),Bash(find:*),Bash(jq:*)"
+
+      - name: Enforce CRITICAL-blocks-merge gate
+        if: always()
+        run: |
+          # claude-code-action posts a REQUEST_CHANGES review if any CRITICAL was
+          # found. We make the workflow itself fail in that case so the required
+          # status check enforces the block at the branch-protection layer.
+          REVIEW_STATE=$(gh api \
+            "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews" \
+            --jq '[.[] | select(.user.login | test("claude|github-actions"; "i"))] | last | .state' \
+            2>/dev/null || echo "NONE")
+          echo "Last AI review state: $REVIEW_STATE"
+          if [ "$REVIEW_STATE" = "CHANGES_REQUESTED" ]; then
+            echo "::error::Claude requested changes. See inline review comments above."
+            exit 1
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
