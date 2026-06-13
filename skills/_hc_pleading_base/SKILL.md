@@ -11,7 +11,7 @@ This is the SHARED structure that every Indian High Court pleading follows. The 
 **Bench-config-driven design:** the structural shape below is universal across Indian HCs. Specific Registry-facing values (Court header text, parties separator, section-header style, annexure prefix, counsel block) vary from bench to bench and are sourced from `<case-folder>/bench-config.md` at run-time. The Format agent substitutes the placeholders below from the user's bench-config; the Drafter renders the final pleading in the user's bench's idiom.
 
 → See `${CLAUDE_PLUGIN_ROOT}/skills/_drafting_common/SKILL.md` for the bench-config-driven rules and the bench-coverage research.
-→ See `${CLAUDE_PLUGIN_ROOT}/bench-config/exemplars/` for bench-config exemplars per HC (Bombay-Nagpur, Bombay-Principal, Delhi, Karnataka, Madras, Calcutta, Allahabad, Punjab & Haryana, Gujarat, Kerala, Rajasthan, etc.).
+→ See `${CLAUDE_PLUGIN_ROOT}/bench-config/exemplars/` for bench-config exemplars per HC (Bombay-[bench city], Bombay-Principal, Delhi, Karnataka, Madras, Calcutta, Allahabad, Punjab & Haryana, Gujarat, Kerala, Rajasthan, etc.).
 
 ## BENCH-CONFIG PLACEHOLDERS USED IN THIS SKELETON
 
@@ -26,7 +26,7 @@ Every `{{bench_config.X}}` placeholder below resolves to a value in the user's `
 | `{{bench_config.annexure_prefix}}` | `ANNEXURE-` (Bombay), `Annexure P/` (Punjab & Haryana, Orissa), `Annexure P-` (Rajasthan), `Exhibit` (Kerala default), `Document No.` (Madras OS), etc. |
 | `{{bench_config.annexure_letter_omissions}}` | `[]` (most HCs) or `["I"]` (Karnataka — letter I omitted) |
 | `{{bench_config.respondent_annexure_prefix}}` | `R/` (Punjab & Haryana) or none (most HCs) |
-| `{{bench_config.counsel_place}}` | `NAGPUR` (Nagpur Bench), `MUMBAI` (Principal Bench), `NEW DELHI` (Delhi), etc. |
+| `{{bench_config.counsel_place}}` | `[PLACE]` ([Your Bench]), `MUMBAI` (Principal Bench), `NEW DELHI` (Delhi), etc. |
 | `{{bench_config.advocate_block_template}}` | Bench's preferred Counsel/Advocate signature-block layout |
 | `{{bench_config.foot_of_pleading_requirements}}` | e.g., Delhi 2018: advocate name + enrolment + phone + email mandatory at foot |
 | `{{bench_config.paper_size}}` | `A4` (most) / `Legal` (some Original Side practices) |
@@ -297,7 +297,7 @@ Validated bench-config exemplars in `${CLAUDE_PLUGIN_ROOT}/bench-config/exemplar
 
 | Exemplar | Validation depth | Source |
 |---|---|---|
-| `bombay-hc-nagpur.md` | Researched · awaiting Registry validation | Bombay HC AS Rules 1960, Nagpur Bench Practice Notes |
+| `bombay-hc.md` | Researched · awaiting Registry validation | Bombay HC AS Rules 1960, Bombay HC bench Practice Notes |
 | `bombay-hc-principal-mumbai.md` | Bench-config supported | Bombay HC AS + OS Rules, Principal-Bench Practice Notes |
 | `bombay-hc-aurangabad.md` | Bench-config supported | Bombay HC AS Rules + Aurangabad Bench Practice |
 | `bombay-hc-goa.md` | Bench-config supported | Bombay HC AS Rules + Goa Bench Practice |

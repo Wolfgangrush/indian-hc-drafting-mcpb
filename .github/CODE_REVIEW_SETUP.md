@@ -1,6 +1,6 @@
 # AI Code Review Setup
 
-Pilot of the PR-gated AI review pipeline for the Wolfgang Rush MCPB family.
+Pilot of the PR-gated AI review pipeline for the wolfgang_rush MCPB family.
 This repo is the first one; replicate the same workflow + branch protection
 in the other 13 MCPB repos + the AI Law Firm jurisdictional repos after
 two clean weeks here.
@@ -17,16 +17,21 @@ two clean weeks here.
 
 ## One-time setup (do this once)
 
-### 1. Add the Anthropic API key as a repo secret
+### 1. Install the Claude Code GitHub App on this repo
 
-```bash
-# From inside the repo
-gh secret set ANTHROPIC_API_KEY
-# paste your key when prompted
-```
+This pilot uses the Claude Code GitHub App for auth — no `ANTHROPIC_API_KEY`
+secret needed. The App routes review calls through your Claude Max
+subscription instead of pay-per-token API billing.
 
-Use a key dedicated to CI — not your interactive key. Set a monthly spend
-cap on it in the Anthropic console so a runaway review can't burn budget.
+Install at: https://github.com/apps/claude (verify current URL in
+Anthropic's Claude Code GitHub docs — the App name may differ slightly).
+Authorize it on `Wolfgangrush/indian-hc-drafting-mcpb` only (not org-wide
+unless you also want it on the other 12 MCPB repos when you replicate the
+pilot).
+
+If the first workflow run errors with "no auth available", the App install
+may also need to expose a `CLAUDE_CODE_OAUTH_TOKEN` repo secret — follow
+the App's setup prompts and re-trigger the workflow.
 
 ### 2. Verify the action's input names
 

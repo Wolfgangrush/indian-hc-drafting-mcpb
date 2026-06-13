@@ -31,14 +31,14 @@ Compose the actual draft pleading as a complete `.docx` file. Single output file
 
 1. **Read** `case-facts.md` + `format-shell.md` + the case-type skill.
 2. **Compose Main Pleading** (every section rendered in the user's HC bench's idiom per `bench-config.md` values already substituted by Format):
-   - Cause title (filled — uses `bench_config.court_header`, e.g., `IN THE HIGH COURT OF JUDICATURE AT BOMBAY BENCH AT NAGPUR.` for Bombay-Nagpur, or `IN THE HIGH COURT OF DELHI AT NEW DELHI.` for Delhi, etc.)
+   - Cause title (filled — uses `bench_config.court_header`, e.g., `IN THE HIGH COURT OF JUDICATURE AT BOMBAY BENCH AT [BENCH CITY].` for Bombay-[bench city], or `IN THE HIGH COURT OF DELHI AT NEW DELHI.` for Delhi, etc.)
    - Parties block (filled — uses `bench_config.parties_separator`)
    - Statutory opening (from case-type skill)
    - Prelude (uses `bench_config.salutation_opener`)
    - **Section header for FACTS:** spaced (`F A C T S`) for Bombay HC; Title Case bold (`Facts`) for most other HCs — per `bench_config.section_headers_style`. The chronological narrative follows. Each documentary fact gets inline annexure marker using `bench_config.annexure_prefix` (e.g., `ANNEXURE-A` Bombay, `Annexure P/1` Punjab & Haryana, `Annexure P-1` Rajasthan, `Exhibit A` Kerala default). Karnataka HC: skip letter I per Writ Proceedings Rules 1977 (use J directly).
    - **Section header for GROUNDS:** per `bench_config.section_headers_style`. Per case-type skill's grounds_structure. Each ground numbered.
    - **PRAYER:** primary relief from case-type skill + `bench_config.prayer_catchall_last_clause`.
-   - **Counsel block:** per `bench_config.counsel_block_template` (e.g., `NAGPUR / DATE / COUNSEL FOR...` for Bombay-Nagpur; `NEW DELHI / DATE / Advocate-Code-Email-Phone` for Delhi HC per 2018 Rules; etc.)
+   - **Counsel block:** per `bench_config.counsel_block_template` (e.g., `[PLACE] / DATE / COUNSEL FOR...` for Bombay-[bench city]; `NEW DELHI / DATE / Advocate-Code-Email-Phone` for Delhi HC per 2018 Rules; etc.)
    - **Notes:** affidavit dispensation per `bench_config.affidavit_dispensation_note` (where applicable), limitation block (where applicable).
 3. **Compose Index:** table from format-shell annexure mapping.
 4. **Compose Synopsis:**

@@ -21,7 +21,7 @@ All party names, dates beyond the impugned order date, addresses, and case numbe
 
 ## Forum and case type
 
-- **Forum:** Bombay High Court, Nagpur Bench
+- **Forum:** Bombay High Court (the bench you specify)
 - **Case type:** `civil-wp` (Articles 226 / 227 of the Constitution of India)
 - **Reliefs sought:** (a) quashing of the SDM's order dated 15 March 2026; (b) interim stay of the cancellation pending final hearing; (c) consequential direction to treat the caste validity certificate as subsisting.
 
@@ -38,5 +38,5 @@ All party names, dates beyond the impugned order date, addresses, and case numbe
 1. Point `read_case_folder(path)` at this directory.
 2. The Reader agent will read both `.docx` files plus this `case-facts-background.md` and produce a structured `case-facts.md`.
 3. Call `get_case_type_format("civil-wp")` to retrieve the writ-petition skeleton.
-4. Call `get_bench_config("bombay-hc-nagpur")` to retrieve Nagpur Bench Registry conventions.
+4. Call `get_bench_config("bombay-hc")` to retrieve [Your Bench] Registry conventions.
 5. The remaining 5 agents (Format → Drafter → Verifier → Refiner → Overseer) run end-to-end to produce `final-draft.docx`.

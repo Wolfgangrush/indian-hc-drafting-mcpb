@@ -1,4 +1,4 @@
-"""Wolfgang Rush — Indian High Court Drafting MCPB.
+"""wolfgang_rush — Indian High Court Drafting MCPB.
 
 Local-execution MCPB Desktop Extension for any High Court of India. Exposes
 the six-agent HC drafting pipeline, thirteen case-type drafting templates,
@@ -7,7 +7,7 @@ multi-bench HCs) as MCP tools that Claude can orchestrate from a Claude
 Desktop chat.
 
 Privacy posture: zero data collection. All processing happens on the user's
-machine. The publisher (Wolfgang Rush) never receives any user data.
+machine. The publisher (wolfgang_rush) never receives any user data.
 
 License: MIT
 Source: https://github.com/Wolfgangrush/indian-hc-drafting-mcpb
@@ -184,7 +184,7 @@ def get_case_type_format(case_type: str) -> str:
     return "\n".join(parts)
 
 
-FULL_ORCHESTRATION_SCRIPT = """# WOLFGANG RUSH — INDIAN HIGH COURT DRAFTING · FULL ORCHESTRATION SCRIPT
+FULL_ORCHESTRATION_SCRIPT = """# wolfgang_rush — INDIAN HIGH COURT DRAFTING · FULL ORCHESTRATION SCRIPT
 
 **YOU MUST execute every step below in order. DO NOT skip steps. DO NOT write
 standalone python-docx, JavaScript, or shell scripts to generate output —
@@ -232,7 +232,7 @@ Call `create_case_folder(case_type, bench)` where:
 
 **If the user has not named their High Court / bench, ASK THEM before calling
 this tool.** Examples: `delhi-hc`, `madras-hc`, `bombay-hc-principal-mumbai`,
-`calcutta-hc`, `allahabad-hc`, `karnataka-hc`, `bombay-hc-nagpur`,
+`calcutta-hc`, `allahabad-hc`, `karnataka-hc`, `bombay-hc`,
 `gauhati-hc`, `kerala-hc`, `punjab-haryana-hc`, etc. Call `list_benches()`
 first to enumerate all 28 bundled exemplars.
 
@@ -407,7 +407,7 @@ def create_case_folder(case_type: str, bench: str, base_dir: str = "") -> dict:
     assume any particular High Court. If the user has not named their bench,
     ASK them before calling this tool. Examples: delhi-hc, madras-hc,
     bombay-hc-principal-mumbai, calcutta-hc, allahabad-hc, karnataka-hc,
-    bombay-hc-nagpur, gauhati-hc. Call list_benches() to discover all 28
+    bombay-hc, gauhati-hc. Call list_benches() to discover all 28
     bundled exemplars.
 
     Args:
@@ -455,7 +455,7 @@ def create_case_folder(case_type: str, bench: str, base_dir: str = "") -> dict:
 
     readme = case_folder / "README.md"
     readme.write_text(
-        f"# Wolfgang Rush HC Drafting · Case Folder\n\n"
+        f"# wolfgang_rush HC Drafting · Case Folder\n\n"
         f"- Case type: {case_type}\n"
         f"- Bench: {bench}\n"
         f"- Created: {datetime.now().isoformat(timespec='seconds')}\n\n"
@@ -585,7 +585,7 @@ def list_benches() -> dict:
     annexure-marker prefix, counsel block format, paper size, font preference,
     and Appellate-Side vs Original-Side Rules reference for that bench.
 
-    Most-validated bench at v0.1.0 is bombay-hc-nagpur; other benches are
+    Most-validated bench at v0.1.0 is bombay-hc; other benches are
     supported via bundled exemplars and welcome community-validation
     contributions for Registry-acceptance discipline.
     """
@@ -595,9 +595,9 @@ def list_benches() -> dict:
         "count": len(benches),
         "note": (
             "Call get_bench_config(bench) for the per-bench Registry conventions. "
-            "Bench names use lowercase hyphenated form (e.g., 'bombay-hc-nagpur', "
+            "Bench names use lowercase hyphenated form (e.g., 'bombay-hc', "
             "'delhi-hc', 'madras-hc'). Multi-bench HCs have separate exemplars "
-            "for each bench (Bombay HC has 4: principal-mumbai, nagpur, aurangabad, goa)."
+            "for each bench (Bombay HC has multiple benches: principal-mumbai, aurangabad, goa, etc.)."
         ),
     }
 
@@ -613,7 +613,7 @@ def get_bench_config(bench: str) -> str:
 
     Args:
         bench: Lowercase hyphenated bench identifier. Use list_benches() to
-               discover available identifiers (e.g., 'bombay-hc-nagpur',
+               discover available identifiers (e.g., 'bombay-hc',
                'delhi-hc', 'madras-hc', 'calcutta-hc').
     """
     available = _list_benches_internal()

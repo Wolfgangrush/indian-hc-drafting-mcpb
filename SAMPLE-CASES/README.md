@@ -6,17 +6,17 @@ All party names are placeholders. No real client data appears here.
 
 ---
 
-## Example 1 — Civil Writ Petition under Article 226 (Bombay HC Nagpur Bench)
+## Example 1 — Civil Writ Petition under Article 226 (Bombay HC (your bench))
 
 **Prompt to use in Claude Desktop chat:**
 
-> *"Draft a civil writ petition under Article 226 of the Constitution before the Bombay High Court, Nagpur Bench. Petitioner is [PETITIONER], challenging the order dated 2026-03-15 of the Sub-Divisional Magistrate at [LOCATION-X] cancelling petitioner's caste-validity certificate. Grounds: violation of principles of natural justice (no opportunity of hearing), arbitrary exercise of power (Article 14), and ultra vires the Maharashtra Scheduled Castes etc. (Regulation of Issuance and Verification of) Caste Certificate Act 2000. Prayer: quashing of impugned order + interim stay during pendency."*
+> *"Draft a civil writ petition under Article 226 of the Constitution before the Bombay High Court (the bench you specify). Petitioner is [PETITIONER], challenging the order dated 2026-03-15 of the Sub-Divisional Magistrate at [LOCATION-X] cancelling petitioner's caste-validity certificate. Grounds: violation of principles of natural justice (no opportunity of hearing), arbitrary exercise of power (Article 14), and ultra vires the Maharashtra Scheduled Castes etc. (Regulation of Issuance and Verification of) Caste Certificate Act 2000. Prayer: quashing of impugned order + interim stay during pendency."*
 
 **Expected tool sequence:**
 1. `list_case_types()` → confirms civil-wp available
 2. `get_case_type_format("civil-wp")` → retrieves the Article 226 civil writ drafting template
-3. `list_benches()` → confirms bombay-hc-nagpur available
-4. `get_bench_config("bombay-hc-nagpur")` → retrieves Bombay HC Nagpur Appellate-Side Rules + Court header + annexure prefix conventions
+3. `list_benches()` → confirms bombay-hc available
+4. `get_bench_config("bombay-hc")` → retrieves Bombay HC Appellate-Side Rules + Court header + annexure prefix conventions
 5. `get_pleading_base()` → retrieves the universal HC pleading skeleton
 6. Drafts the writ using Article 226 + natural justice + ultra vires framework
 7. `save_draft_as_docx(markdown, "/path/draft-civil-wp.docx")` → renders filing-grade .docx

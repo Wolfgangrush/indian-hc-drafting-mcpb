@@ -1,8 +1,8 @@
-# Wolfgang Rush — Indian High Court Drafting
+# wolfgang_rush — Indian High Court Drafting
 
 **MCPB Desktop Extension** for drafting pleadings before any High Court of India.
 
-Bench-config-aware: 28 bench exemplars covering all 25 Indian High Courts including multi-bench HCs (Bombay Principal Mumbai, Nagpur, Aurangabad, Goa). Designed for Indian advocates using **Claude Desktop App**. Local-execution. Zero data collection.
+Bench-config-aware: 28 bench exemplars covering all 25 Indian High Courts including multi-bench HCs (Bombay Principal Mumbai, [bench city], Aurangabad, Goa). Designed for Indian advocates using **Claude Desktop App**. Local-execution. Zero data collection.
 
 > *Also available as a Claude Code Plugin (for developers using the Claude Code CLI):*
 > *[github.com/Wolfgangrush/indian-hc-drafting-litigation](https://github.com/Wolfgangrush/indian-hc-drafting-litigation)*
@@ -11,7 +11,7 @@ Bench-config-aware: 28 bench exemplars covering all 25 Indian High Courts includ
 
 ## What this connector does
 
-Exposes the Wolfgang Rush six-agent HC drafting pipeline as MCP tools that Claude can orchestrate from a Claude Desktop chat. Drafts the following case types:
+Exposes the wolfgang_rush six-agent HC drafting pipeline as MCP tools that Claude can orchestrate from a Claude Desktop chat. Drafts the following case types:
 
 ### Constitutional / Writ-side
 
@@ -43,11 +43,11 @@ Exposes the Wolfgang Rush six-agent HC drafting pipeline as MCP tools that Claud
 
 ### Bench exemplars (28 covering all 25 Indian HCs)
 
-`allahabad-hc` · `andhra-pradesh-hc` · `bombay-hc-aurangabad` · `bombay-hc-goa` · `bombay-hc-nagpur` · `bombay-hc-principal-mumbai` · `calcutta-hc` · `chhattisgarh-hc` · `delhi-hc` · `gauhati-hc` · `gujarat-hc` · `himachal-pradesh-hc` · `jammu-kashmir-ladakh-hc` · `jharkhand-hc` · `karnataka-hc` · `kerala-hc` · `madhya-pradesh-hc` · `madras-hc` · `manipur-hc` · `meghalaya-hc` · `orissa-hc` · `patna-hc` · `punjab-haryana-hc` · `rajasthan-hc` · `sikkim-hc` · `telangana-hc` · `tripura-hc` · `uttarakhand-hc`
+`allahabad-hc` · `andhra-pradesh-hc` · `bombay-hc-aurangabad` · `bombay-hc-goa` · `bombay-hc` · `bombay-hc-principal-mumbai` · `calcutta-hc` · `chhattisgarh-hc` · `delhi-hc` · `gauhati-hc` · `gujarat-hc` · `himachal-pradesh-hc` · `jammu-kashmir-ladakh-hc` · `jharkhand-hc` · `karnataka-hc` · `kerala-hc` · `madhya-pradesh-hc` · `madras-hc` · `manipur-hc` · `meghalaya-hc` · `orissa-hc` · `patna-hc` · `punjab-haryana-hc` · `rajasthan-hc` · `sikkim-hc` · `telangana-hc` · `tripura-hc` · `uttarakhand-hc`
 
 Each exemplar captures bench-specific Registry conventions (Court header, parties separator, section-header style, annexure prefix, counsel block format, paper size, font preference, Appellate-Side vs Original-Side Rules reference).
 
-Most-validated bench at v0.1.0 is **bombay-hc-nagpur**. Other benches are bundled with verified exemplars and welcome community-validation contributions.
+Most-validated bench at v0.1.0 is **bombay-hc**. Other benches are bundled with verified exemplars and welcome community-validation contributions.
 
 ---
 
@@ -72,7 +72,7 @@ In a Claude Desktop chat, describe what you want to draft and specify the bench.
 
 Example prompts:
 
-- *"Draft a civil writ petition under Article 226 before the Bombay HC Nagpur Bench challenging the SDM order dated 2026-03-15, prayer for quashing + interim stay."*
+- *"Draft a civil writ petition under Article 226 before the High Courts of India challenging the SDM order dated 2026-03-15, prayer for quashing + interim stay."*
 - *"Draft a Section 482 CrPC application before the Delhi HC for quashing FIR No. [FIR-X] under Sections 318 + 316 BNSS on Bhajan Lal categories."*
 - *"Draft a contempt petition before the Madras HC for wilful disobedience of the HC order dated [DATE-N] in [WP-N]."*
 
@@ -91,7 +91,7 @@ Example prompts:
 
 ## Privacy
 
-This connector collects **zero** user data. All processing happens on the user's machine. The publisher (Wolfgang Rush) never receives any user data.
+This connector collects **zero** user data. All processing happens on the user's machine. The publisher (wolfgang_rush) never receives any user data.
 
 Three-layer privacy firewall: **L1 substitution** → **L2 LLM-blind** → **L3 re-substitution**.
 
@@ -138,7 +138,7 @@ This is the connector's contribution to your **Section 8(5) DPDP Act 2023** safe
 
 ## ⚖️ DPDP Act 2023 — what this means for you
 
-**Publisher position.** Wolfgang Rush, in its capacity as software publisher, is **neither a Data Fiduciary nor a Data Processor** under the DPDP Act 2023 in respect of this connector. The connector runs entirely on your machine. There is no Wolfgang Rush server, no telemetry, no API endpoint that the publisher controls. Section 2(i) requires "determining purpose and means of processing" — Wolfgang Rush determines neither.
+**Publisher position.** wolfgang_rush, in its capacity as software publisher, is **neither a Data Fiduciary nor a Data Processor** under the DPDP Act 2023 in respect of this connector. The connector runs entirely on your machine. There is no wolfgang_rush server, no telemetry, no API endpoint that the publisher controls. Section 2(i) requires "determining purpose and means of processing" — wolfgang_rush determines neither.
 
 **User position.** You — the advocate using this connector — are the **Data Fiduciary** for your own client's personal data. This was true before installing the connector and remains true after. Your obligations under Sections 4, 5, 6, 8, 9, 11, 13 of the DPDP Act 2023 continue independent of this connector.
 
@@ -178,7 +178,7 @@ MIT. See LICENSE.
 
 ## Publisher
 
-**Wolfgang Rush** — independent open-source legal-tech publisher. Contact: wolfgangrush@gmail.com
+**wolfgang_rush** — independent open-source legal-tech publisher. Contact: wolfgangrush@gmail.com
 
 ## Source
 

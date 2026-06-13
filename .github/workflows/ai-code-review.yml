@@ -34,11 +34,21 @@ jobs:
         id: claude
         uses: anthropics/claude-code-action@beta
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          # Pin to a verified commit SHA after the first successful run on a test PR.
-          # @beta is a moving tag; for a merge-gate we want determinism once it works.
+          # Auth: install the official Claude Code GitHub App on this repo
+          # (https://github.com/apps/claude — verify current URL in Anthropic
+          # docs). The App routes review calls through RSH's Claude Max
+          # subscription instead of pay-per-token API billing — no
+          # ANTHROPIC_API_KEY secret needed.
+          #
+          # If the action errors on first run with "no auth", the App install
+          # may need to also surface a CLAUDE_CODE_OAUTH_TOKEN secret — set it
+          # per the App's setup flow.
+          #
+          # Pin to a verified commit SHA after the first successful run on a
+          # test PR. @beta is a moving tag; for a merge-gate we want
+          # determinism once it works.
           direct_prompt: |
-            You are reviewing a pull request on a Wolfgang Rush MCPB plugin
+            You are reviewing a pull request on a wolfgang_rush MCPB plugin
             (wolfgang-indian-hc-drafting — an Indian High Court drafting toolchain
             distributed as a Claude Desktop Extension). Review the diff between
             this PR's head and main.

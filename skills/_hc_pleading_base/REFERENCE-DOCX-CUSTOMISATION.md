@@ -76,7 +76,7 @@ Pandoc reads the styles from your customised `reference.docx` and applies them t
 
 ## Bench-specific reference.docx (advanced)
 
-If you practise at MULTIPLE benches with different formatting (e.g., you appear at Bombay HC Nagpur sometimes and Bombay HC Principal Bench other times — different paper size / different annexure style), you can maintain separate reference.docx files in your personal templates folder and point the Drafter at the right one via the case folder's `bench-config.md`. Future versions of the plugin will support per-case-folder reference.docx override.
+If you practise at MULTIPLE benches with different formatting (e.g., you appear at Bombay HC sometimes and Bombay HC Principal Bench other times — different paper size / different annexure style), you can maintain separate reference.docx files in your personal templates folder and point the Drafter at the right one via the case folder's `bench-config.md`. Future versions of the plugin will support per-case-folder reference.docx override.
 
 ---
 
