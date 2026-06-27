@@ -1,3 +1,19 @@
+<div align="center">
+
+<img src="docs/banner.png" width="820"/>
+
+**Bench-config-aware legal drafting for every High Court of India.**
+
+Visit the live site: [wolfgangrush.github.io](https://wolfgangrush.github.io)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Claude MCP connector](https://img.shields.io/badge/Claude-MCP%20connector-d97757)](https://wolfgangrush.github.io)
+[![Jurisdiction](https://img.shields.io/badge/Jurisdiction-High%20Courts%20of%20India-FF9933)](https://wolfgangrush.github.io)
+[![Architecture](https://img.shields.io/badge/Architecture-local--first-success)](https://wolfgangrush.github.io)
+
+</div>
+
+
 # wolfgang_rush — Indian High Court Drafting
 
 **MCPB Desktop Extension** for drafting pleadings before any High Court of India.
